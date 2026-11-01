@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JAMALUDIN // Blue Archive Tactical Portfolio & QC Specialist</title>
+  <meta name="description" content="Web portofolio interaktif bertema Blue Archive milik Jamaludin (ZuyaKazama) - Operator Quality Control & Mahasiswa S1 Teknik Informatika Universitas Pelita Bangsa.">
+  <meta name="author" content="Jamaludin">
+  <meta name="theme-color" content="#070d18">
+  <link rel="icon" type="image/png" href="assets/icons/schale_logo.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="ba-viewport" id="baViewport">
+    <!-- Tactical Grid & Background FX -->
+    <div class="ba-bg-pattern"></div>
+    <div class="ba-scanlines"></div>
+    <div class="ba-particles" id="particlesContainer"></div>
+
+    <!-- ================= TOP HUD HEADER ================= -->
+    <header class="ba-header">
+      <div class="ba-header-left">
+        <div class="ba-schale-badge">
+          <img src="assets/icons/schale_logo.png" alt="SCHALE" class="ba-schale-logo-img">
+          <span class="ba-schale-title">SCHALE // DOSSIER</span>
+          <span class="ba-schale-tag">ID: ZUYA-QC</span>
+        </div>
+      </div>
+
+      <div class="ba-header-center">
+        <div class="ba-system-status">
+          <span class="ba-status-pulse"></span>
+          <span>KIVOTOS LINK: SYNCHRONIZED</span>
+        </div>
+      </div>
+
+      <div class="ba-header-right">
+        <div class="ba-kivotos-clock" id="kivotosClock">
+          <span>TIME</span> <span id="clockValue">00:00:00 WIB</span>
+        </div>
+        <div class="ba-header-controls">
+          <button class="ba-hud-btn" id="btnToggleBgm" title="Toggle BGM Audio">
+            <span id="bgmIcon">♫</span> <span id="bgmText">BGM: OFF</span>
+          </button>
+          <button class="ba-hud-btn active" id="btnToggleSfx" title="Toggle Sound Effects">
+            <span id="sfxIcon">🔊</span> <span id="sfxText">SFX: ON</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ================= MAIN STAGE WITH SEPARATE FULL VIEWS ================= -->
+    <main class="ba-stage" id="mainStage">
+
+      <!-- ================= 00: HOME VIEW (Hero Menu + Companion Stage) ================= -->
+      <section class="ba-view ba-view-home active" id="viewHome">
+        <!-- LEFT: Hero Dossier & Dynamic Navigation Menu -->
+        <div class="ba-left-stage" id="leftStage">
+          <!-- HERO DOSSIER BANNER -->
+          <div class="ba-hero-header" id="heroHeader">
+            <div class="ba-sub-tag">TACTICAL SPECIALIST // SENSEI DOSSIER</div>
+            
+            <!-- Persona 5 Cutout Style Dynamic Title -->
+            <div class="ba-cutout-title" id="cutoutName">
+              <div class="ba-cutout-box" style="--rot: -3deg;">J</div>
+              <div class="ba-cutout-box accent-blue" style="--rot: 2deg;">A</div>
+              <div class="ba-cutout-box" style="--rot: -2deg;">M</div>
+              <div class="ba-cutout-box accent-yellow" style="--rot: 3deg;">A</div>
+              <div class="ba-cutout-box" style="--rot: -1deg;">L</div>
+              <div class="ba-cutout-box accent-blue" style="--rot: 2deg;">U</div>
+              <div class="ba-cutout-box" style="--rot: -3deg;">D</div>
+              <div class="ba-cutout-box" style="--rot: 1deg;">I</div>
+              <div class="ba-cutout-box accent-yellow" style="--rot: -2deg;">N</div>
+            </div>
+
+            <div class="ba-hero-role-badge">
+              <span class="ba-role-title">OPERATOR QUALITY CONTROL // S1 TEKNIK INFORMATIKA</span>
+              <span class="ba-role-location">📍 BOGOR</span>
+            </div>
+
+            <div class="ba-bio-box">
+              Individu yang berdedikasi tinggi dengan pengalaman kerja nyata dalam evaluasi produk, pembuatan laporan harian, Outgoing Quality Control (OQC), dan manajemen alur kerja. Memiliki ketelitian tinggi dan kemampuan analitis dalam sistem teknologi informasi modern.
+            </div>
+          </div>
+
+          <!-- DYNAMIC INTERACTIVE MENU (4 ACTIONS) -->
+          <nav class="ba-menu-container" id="mainMenu" aria-label="Main Navigation">
+            <!-- 01: PROJECTS -->
+            <div class="ba-menu-item" data-target="viewProjects" data-index="0" tabindex="0">
+              <div class="ba-menu-inner">
+                <span class="ba-menu-num">01</span>
+                <div class="ba-menu-letters">
+                  <span class="ba-menu-char" style="--r: -2deg;">P</span>
+                  <span class="ba-menu-char" style="--r: 2deg;">R</span>
+                  <span class="ba-menu-char" style="--r: -1deg;">O</span>
+                  <span class="ba-menu-char" style="--r: 3deg;">J</span>
+                  <span class="ba-menu-char" style="--r: -2deg;">E</span>
+                  <span class="ba-menu-char" style="--r: 1deg;">C</span>
+                  <span class="ba-menu-char" style="--r: -3deg;">T</span>
+                  <span class="ba-menu-char" style="--r: 2deg;">S</span>
+                </div>
+                <span class="ba-menu-sub">MISI & OPERASI</span>
+              </div>
+              <span class="ba-menu-arrow">◀</span>
+            </div>
+
+            <!-- 02: SKILLS -->
+            <div class="ba-menu-item" data-target="viewSkills" data-index="1" tabindex="0">
+              <div class="ba-menu-inner">
+                <span class="ba-menu-num">02</span>
+                <div class="ba-menu-letters">
+                  <span class="ba-menu-char" style="--r: 2deg;">S</span>
+                  <span class="ba-menu-char" style="--r: -2deg;">K</span>
+                  <span class="ba-menu-char" style="--r: 1deg;">I</span>
+                  <span class="ba-menu-char" style="--r: -3deg;">L</span>
+                  <span class="ba-menu-char" style="--r: 2deg;">L</span>
+                  <span class="ba-menu-char" style="--r: -1deg;">S</span>
+                </div>
+                <span class="ba-menu-sub">KEMAMPUAN TAKTIS</span>
+              </div>
+              <span class="ba-menu-arrow">◀</span>
+            </div>
+
+            <!-- 03: ABOUT -->
+            <div class="ba-menu-item" data-target="viewAbout" data-index="2" tabindex="0">
+              <div class="ba-menu-inner">
+                <span class="ba-menu-num">03</span>
+                <div class="ba-menu-letters">
+                  <span class="ba-menu-char" style="--r: -2deg;">A</span>
+                  <span class="ba-menu-char" style="--r: 2deg;">B</span>
+                  <span class="ba-menu-char" style="--r: -1deg;">O</span>
+                  <span class="ba-menu-char" style="--r: 3deg;">U</span>
+                  <span class="ba-menu-char" style="--r: -2deg;">T</span>
+                </div>
+                <span class="ba-menu-sub">PROFIL & RIWAYAT</span>
+              </div>
+              <span class="ba-menu-arrow">◀</span>
+            </div>
+
+            <!-- 04: CONTACT -->
+            <div class="ba-menu-item" data-target="viewContact" data-index="3" tabindex="0">
+              <div class="ba-menu-inner">
+                <span class="ba-menu-num">04</span>
+                <div class="ba-menu-letters">
+                  <span class="ba-menu-char" style="--r: 2deg;">C</span>
+                  <span class="ba-menu-char" style="--r: -2deg;">O</span>
+                  <span class="ba-menu-char" style="--r: 1deg;">N</span>
+                  <span class="ba-menu-char" style="--r: -1deg;">T</span>
+                  <span class="ba-menu-char" style="--r: 3deg;">A</span>
+                  <span class="ba-menu-char" style="--r: -2deg;">C</span>
+                  <span class="ba-menu-char" style="--r: 1deg;">T</span>
+                </div>
+                <span class="ba-menu-sub">TRANSMISI SCHALE</span>
+              </div>
+              <span class="ba-menu-arrow">◀</span>
+            </div>
+          </nav>
+        </div>
+
+        <!-- RIGHT: BLUE ARCHIVE STUDENT COMPANION & HALO (HOME: SUNAOOKAMI SHIROKO) -->
+        <aside class="ba-right-stage" id="rightStage">
+          <!-- Ambient Halo Glow in Background -->
+          <div class="ba-halo-glow-bg" id="haloGlow"></div>
+
+          <!-- Giant School Crest Background Watermark -->
+          <img src="assets/icons/schale_logo.png" alt="Crest" class="ba-watermark-crest" id="watermarkCrest">
+
+          <!-- Interactive Speech Bubble (Dialogue Box) -->
+          <div class="ba-speech-bubble" id="speechBubbleHome" data-voice="home" title="Klik untuk memutar ulang suara Shiroko">
+            <div class="ba-bubble-header">
+              <div class="ba-bubble-identity">
+                <span class="ba-bubble-name" id="bubbleStudentName">Sunaookami Shiroko</span>
+                <span class="ba-bubble-role" id="bubbleStudentRole">Abydos High School · Countermeasure Committee</span>
+              </div>
+              <div class="ba-bubble-voice-tag">
+                <span class="ba-equalizer-bars"><span></span><span></span><span></span></span>
+                <span>VOICE</span>
+              </div>
+            </div>
+            <div class="ba-bubble-jp">「ようこそ、先生。今日もよろしく。」</div>
+            <p class="ba-bubble-text" id="bubbleQuoteText">
+              "Sensei, selamat datang di Dossier Taktikal Jamaludin. Nn, mari kita tinjau hasil operasi dan standar kontrol kualitas hari ini."
+            </p>
+          </div>
+
+          <!-- Full Height Transparent Character Sprite -->
+          <div class="ba-character-stage">
+            <img src="assets/characters/shiroko_portrait.webp" alt="Sunaookami Shiroko" class="ba-student-portrait main-student-portrait" id="studentPortrait" data-voice="home" title="Klik untuk mendengarkan suara Shiroko!">
+          </div>
+        </aside>
+      </section>
+
+      <!-- ================= 01: PROJECTS VIEW (Split Layout with Aris Companion) ================= -->
+      <section class="ba-view ba-view-projects" id="viewProjects" aria-labelledby="headingProjects">
+        <div class="ba-projects-left-col">
+          <div class="ba-view-top-bar">
+            <div class="ba-view-dossier-tag">SCHALE DOSSIER // OPERATIONS ARCHIVE</div>
+            <button class="ba-view-esc-btn btn-back-home" title="Kembali ke Beranda">
+              <span class="ba-esc-tag">ESC</span> BACK
+            </button>
+          </div>
+
+          <div class="ba-view-hero">
+            <!-- Persona 5 Cutout Title for PROJECTS -->
+            <div class="ba-cutout-title" id="headingProjects">
+              <div class="ba-cutout-box" style="--rot: -2deg;">P</div>
+              <div class="ba-cutout-box accent-blue" style="--rot: 2deg;">R</div>
+              <div class="ba-cutout-box" style="--rot: -1deg;">O</div>
+              <div class="ba-cutout-box accent-yellow" style="--rot: 3deg;">J</div>
+              <div class="ba-cutout-box" style="--rot: -2deg;">E</div>
+              <div class="ba-cutout-box accent-blue" style="--rot: 1deg;">C</div>
+              <div class="ba-cutout-box" style="--rot: -3deg;">T</div>
+              <div class="ba-cutout-box accent-yellow" style="--rot: 2deg;">S</div>
+            </div>
+            <div class="ba-view-sub">FEATURED // MISI & HASIL PRODUKSI INDUSTRI</div>
+          </div>
+
+          <div class="ba-projects-grid">
+            <!-- Project 1: Kivotos QC Inspector -->
+            <article class="ba-project-card">
+              <div>
+                <div class="ba-project-badge-bar">
+                  <span class="ba-project-category">QC & INDUSTRIAL TECH</span>
+                  <span class="ba-project-status">● VERIFIED</span>
+                </div>
+                <h3 class="ba-project-title">Kivotos QC Inspector System</h3>
+                <p class="ba-project-desc">
+                  Aplikasi manajemen inspeksi kualitas produk berbasis web untuk pencatatan real-time hasil uji visual, dimensi, status OK/NG, dan kalkulasi AQL (Acceptable Quality Limit).
+                </p>
+                <div class="ba-project-tags">
+                  <span class="ba-tag">Quality Control</span>
+                  <span class="ba-tag">AQL Sampling</span>
+                  <span class="ba-tag">OK/NG Matrix</span>
+                  <span class="ba-tag">JavaScript</span>
+                </div>
+              </div>
+              <div class="ba-project-actions">
+                <span style="font-family: var(--ba-font-mono); font-size: 11px; color: var(--ba-text-dim);">OPS: LIVE</span>
+                <button class="ba-btn-demo" onclick="openProjectModal('qc')">LIHAT DETAIL ▶</button>
+              </div>
+            </article>
+
+            <!-- Project 2: Pasifik OQC Automation & Quarantine Hub -->
+            <article class="ba-project-card">
+              <div>
+                <div class="ba-project-badge-bar">
+                  <span class="ba-project-category">FACTORY WORKFLOW</span>
+                  <span class="ba-project-status">● DEPLOYED</span>
+                </div>
+                <h3 class="ba-project-title">Pasifik OQC & Defect Tracker</h3>
+                <p class="ba-project-desc">
+                  Sistem pemantauan outgoing quality control cetakan plastik injection. Menganalisis defect produk (shrinkage, flash, short shot) serta mengotomasi isolasi karantina sesuai standar 5S & K3.
+                </p>
+                <div class="ba-project-tags">
+                  <span class="ba-tag">Plastic Injection</span>
+                  <span class="ba-tag">Defect Management</span>
+                  <span class="ba-tag">5S & K3 Standard</span>
+                  <span class="ba-tag">Excel Analytics</span>
+                </div>
+              </div>
+              <div class="ba-project-actions">
+                <span style="font-family: var(--ba-font-mono); font-size: 11px; color: var(--ba-text-dim);">OPS: INTERNAL</span>
+                <button class="ba-btn-demo" onclick="openProjectModal('oqc')">LIHAT DETAIL ▶</button>
+              </div>
+            </article>
+
+            <!-- Project 3: S1 Informatics Academic Hub -->
+            <article class="ba-project-card">
+              <div>
+                <div class="ba-project-badge-bar">
+                  <span class="ba-project-category">ACADEMIC & CODE</span>
+                  <span class="ba-project-status">● ONGOING</span>
+                </div>
+                <h3 class="ba-project-title">Pelita Bangsa Academic Hub</h3>
+                <p class="ba-project-desc">
+                  Kumpulan proyek dan modul pemrograman selama perkuliahan S1 Teknik Informatika di Universitas Pelita Bangsa: algoritma struktur data, basis data, dan arsitektur web modern.
+                </p>
+                <div class="ba-project-tags">
+                  <span class="ba-tag">S1 Informatika</span>
+                  <span class="ba-tag">Web Dev</span>
+                  <span class="ba-tag">Algorithms</span>
+                  <span class="ba-tag">Database</span>
+                </div>
+              </div>
+              <div class="ba-project-actions">
+                <span style="font-family: var(--ba-font-mono); font-size: 11px; color: var(--ba-text-dim);">OPS: GITHUB</span>
+                <button class="ba-btn-demo" onclick="openProjectModal('upb')">LIHAT DETAIL ▶</button>
+              </div>
+            </article>
+
+            <!-- Project 4: Blue Archive Tactical Web Portfolio -->
+            <article class="ba-project-card">
+              <div>
+                <div class="ba-project-badge-bar">
+                  <span class="ba-project-category">WEB APPLICATION</span>
+                  <span class="ba-project-status">● MASTERWORK</span>
+                </div>
+                <h3 class="ba-project-title">SCHALE Kivotos Tactical Portfolio</h3>
+                <p class="ba-project-desc">
+                  Web portofolio interaktif yang mengombinasikan visual dinamis Persona 5 dengan aesthetic Blue Archive (Kivotos HUD, sound synthesizer Web Audio API, dynamic character companion).
+                </p>
+                <div class="ba-project-tags">
+                  <span class="ba-tag">Vanilla CSS</span>
+                  <span class="ba-tag">Web Audio API</span>
+                  <span class="ba-tag">Game UI HUD</span>
+                  <span class="ba-tag">ZuyaKazama</span>
+                </div>
+              </div>
+              <div class="ba-project-actions">
+                <span style="font-family: var(--ba-font-mono); font-size: 11px; color: var(--ba-text-dim);">OPS: YOU ARE HERE</span>
+                <button class="ba-btn-demo" onclick="openProjectModal('portfolio')">LIHAT DETAIL ▶</button>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Right: Dedicated Companion - Tendou Aris -->
+        <div class="ba-view-side-companion">
+          <div class="ba-side-halo-glow" style="background: radial-gradient(circle, rgba(56, 189, 248, 0.45) 0%, transparent 70%);"></div>
+          <img src="assets/icons/schale_logo.png" alt="Crest" class="ba-side-crest-watermark">
+
+          <div class="ba-speech-bubble" id="speechBubbleProjects" data-voice="viewProjects" title="Klik untuk memutar suara Aris">
+            <div class="ba-bubble-header">
+              <div class="ba-bubble-identity">
+                <span class="ba-bubble-name">Tendou Aris</span>
+                <span class="ba-bubble-role">Millennium Science School · Game Dev Department</span>
+              </div>
+              <div class="ba-bubble-voice-tag">
+                <span class="ba-equalizer-bars"><span></span><span></span><span></span></span>
+                <span>VOICE</span>
+              </div>
+            </div>
+            <div class="ba-bubble-jp">「パンパカパーン！レベルアップです！」</div>
+            <p class="ba-bubble-text">
+              "Pan-paka-pan! Aris telah membuka artefak proyek Jamaludin! Seluruh kode aplikasi dan sistem QC beroperasi pada status 100%!"
+            </p>
+          </div>
+
+          <div class="ba-character-stage">
+            <img src="assets/characters/aris_portrait.webp" alt="Tendou Aris" class="ba-side-student-portrait" data-voice="viewProjects" title="Klik untuk mendengarkan suara Aris!">
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 02: SKILLS VIEW (Separate Split View) ================= -->
+      <section class="ba-view ba-view-skills" id="viewSkills" aria-labelledby="headingSkills">
+        <div class="ba-skills-left-col">
+          <div class="ba-view-top-bar">
+            <div class="ba-view-dossier-tag">SCHALE DOSSIER // TACTICAL APTITUDE</div>
+            <button class="ba-view-esc-btn btn-back-home" title="Kembali ke Beranda">
+              <span class="ba-esc-tag">ESC</span> BACK
+            </button>
+          </div>
+
+          <div class="ba-view-hero">
+            <!-- Persona 5 Cutout Title for SKILLS -->
+            <div class="ba-cutout-title" id="headingSkills">
+              <div class="ba-cutout-box" style="--rot: 2deg;">S</div>
+              <div class="ba-cutout-box accent-blue" style="--rot: -2deg;">K</div>
+              <div class="ba-cutout-box" style="--rot: 1deg;">I</div>
+              <div class="ba-cutout-box accent-yellow" style="--rot: -3deg;">L</div>
+              <div class="ba-cutout-box" style="--rot: 2deg;">L</div>
+              <div class="ba-cutout-box accent-blue" style="--rot: -1deg;">S</div>
+            </div>
+            <div class="ba-view-sub">TACTICAL APTITUDE // KEMAMPUAN TAKTIS & INDEKS EVALUASI</div>
+          </div>
+
+          <div class="ba-skills-container">
+            <!-- Group 1: Quality Control & Industrial -->
+            <div class="ba-skills-group">
+              <h3 class="ba-group-title">🔍 QUALITY CONTROL & INDUSTRY</h3>
+
+              <div class="ba-skill-item">
+                <div class="ba-skill-label-row">
+                  <span>Quality Control Assessment (OK/NG)</span>
+                  <span class="ba-skill-pct">96%</span>
+                </div>
+                <div class="ba-skill-bar-track">
+                  <div class="ba-skill-bar-fill" style="width: 96%;"></div>
+                </div>
+              </div>
+
+              <div class="ba-skill-item">
+                <div class="ba-skill-label-row">
+                  <span>Outgoing QC (OQC) & Final Inspection</span>
+                  <span class="ba-skill-pct">94%</span>
+                </div>
+                <div class="ba-skill-bar-track">
+                  <div class="ba-skill-bar-fill" style="width: 94%;"></div>
+                </div>
+              </div>
+
+              <div class="ba-skill-item">
+                <div class="ba-skill-label-row">
+                  <span>Pemeriksaan Visual & Dimensi Presisi</span>
+                  <span class="ba-skill-pct">92%</span>
+                </div>
+                <div class="ba-skill-bar-track">
+                  <div class="ba-skill-bar-fill" style="width: 92%;"></div>
+                </div>
+              </div>
+
+              <div class="ba-skill-item">
+                <div class="ba-skill-label-row">
+                  <span>Pemahaman Standar 5S & Keselamatan K3</span>
+                  <span class="ba-skill-pct">95%</span>
+                </div>
+                <div class="ba-skill-bar-track">
+                  <div class="ba-skill-bar-fill" style="width: 95%;"></div>
+                </div>
+              </div>
+
+              <div class="ba-skill-item">
+                <div class="ba-skill-label-row">
+                  <span>Defect Management & Area Karantina</span>
+                  <span class="ba-skill-pct">90%</span>
+                </div>
+                <div class="ba-skill-bar-track">
+                  <div class="ba-skill-bar-fill" style="width: 90%;"></div>
+                </div>
+              </div>
+
+              <div class="ba-skill-item">
+                <div class="ba-skill-label-row">
+                  <span>Standar Sampling Pelanggan & AQL</span>
+                  <span class="ba-skill-pct">92%</span>
+                </div>
+                <div class="ba-skill-bar-track">
+                  <div class="ba-skill-bar-fill" style="width: 92%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Group 2: Tech, Informatics & Operations -->
+            <div class="ba-skills-group">
+              <h3 class="ba-group-title">💻 INFORMATIKA & SOFT SKILLS</h3>
+
+              <div class="ba-skill-item">
+                <div class="ba-skill-label-row">
+                  <span>Microsoft Office (Excel Pivot, Word, Docs)</span>
+                  <span class="ba-skill-pct">92%</span>
+                </div>
+                <div class="ba-skill-bar-track">
+                  <div class="ba-skill-bar-fill" style="width: 92%;"></div>
+                </div>
+              </div>
+
+              <div class="ba-skill-item">
+                <div class="ba-skill-label-row">
+                  <span>Web Development (HTML5, Modern CSS, JS)</span>
+                  <span class="ba-skill-pct">88%</span>
+                </div>
+                <div class="ba-skill-bar-track">
+                  <div class="ba-skill-bar-fill" style="width: 88%;"></div>
+                </div>
+              </div>
+
+              <div class="ba-skill-item">
+                <div class="ba-skill-label-row">
+                  <span>S1 Teknik Informatika (Algoritma & DB)</span>
+                  <span class="ba-skill-pct">85%</span>
+                </div>
+                <div class="ba-skill-bar-track">
+                  <div class="ba-skill-bar-fill" style="width: 85%;"></div>
+                </div>
+              </div>
+
+              <div class="ba-skill-item">
+                <div class="ba-skill-label-row">
+                  <span>Sistem Kerja Shift & Disiplin Waktu</span>
+                  <span class="ba-skill-pct">96%</span>
+                </div>
+                <div class="ba-skill-bar-track">
+                  <div class="ba-skill-bar-fill" style="width: 96%;"></div>
+                </div>
+              </div>
+
+              <div class="ba-skill-item">
+                <div class="ba-skill-label-row">
+                  <span>Komunikasi Lintas Departemen (Produksi & QC)</span>
+                  <span class="ba-skill-pct">92%</span>
+                </div>
+                <div class="ba-skill-bar-track">
+                  <div class="ba-skill-bar-fill" style="width: 92%;"></div>
+                </div>
+              </div>
+
+              <div class="ba-skill-item">
+                <div class="ba-skill-label-row">
+                  <span>Git & Version Control (GitHub: ZuyaKazama)</span>
+                  <span class="ba-skill-pct">88%</span>
+                </div>
+                <div class="ba-skill-bar-track">
+                  <div class="ba-skill-bar-fill" style="width: 88%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Dedicated Companion - Hayase Yuuka -->
+        <div class="ba-view-side-companion">
+          <div class="ba-side-halo-glow" style="background: radial-gradient(circle, rgba(77, 124, 254, 0.45) 0%, transparent 70%);"></div>
+          <img src="assets/icons/schale_logo.png" alt="Crest" class="ba-side-crest-watermark">
+
+          <div class="ba-speech-bubble" id="speechBubbleSkills" data-voice="viewSkills" title="Klik untuk memutar suara Yuuka">
+            <div class="ba-bubble-header">
+              <div class="ba-bubble-identity">
+                <span class="ba-bubble-name">Hayase Yuuka</span>
+                <span class="ba-bubble-role">Millennium Science School · Seminar (Treasurer)</span>
+              </div>
+              <div class="ba-bubble-voice-tag">
+                <span class="ba-equalizer-bars"><span></span><span></span><span></span></span>
+                <span>VOICE</span>
+              </div>
+            </div>
+            <div class="ba-bubble-jp">「ふふーん。やっぱり先生は賢いですね。」</div>
+            <p class="ba-bubble-text">
+              "Fufun~ Nilai evaluasi Quality Control 96%, pemahaman 5S & K3, dan logika informatika terhitung sangat presisi. Jamaludin memang operator yang cerdas!"
+            </p>
+          </div>
+
+          <div class="ba-character-stage">
+            <img src="assets/characters/yuuka_portrait.webp" alt="Hayase Yuuka" class="ba-side-student-portrait" data-voice="viewSkills" title="Klik untuk mendengarkan suara Yuuka!">
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 03: ABOUT VIEW (Separate Split View) ================= -->
+      <section class="ba-view ba-view-about" id="viewAbout" aria-labelledby="headingAbout">
+        <!-- Left: Companion Character Side with Cutout Title & Sorasaki Hina -->
+        <div class="ba-about-left-col">
+          <div class="ba-view-hero">
+            <div class="ba-cutout-title" id="headingAbout">
+              <div class="ba-cutout-box" style="--rot: -2deg;">A</div>
+              <div class="ba-cutout-box accent-blue" style="--rot: 2deg;">B</div>
+              <div class="ba-cutout-box" style="--rot: -1deg;">O</div>
+              <div class="ba-cutout-box accent-yellow" style="--rot: 3deg;">U</div>
+              <div class="ba-cutout-box" style="--rot: -2deg;">T</div>
+            </div>
+            <div class="ba-view-sub">SENSEI DOSSIER // BIODATA & JEJAK REKAM</div>
+          </div>
+
+          <div class="ba-speech-bubble" id="speechBubbleAbout" data-voice="viewAbout" title="Klik untuk memutar suara Hina">
+            <div class="ba-bubble-header">
+              <div class="ba-bubble-identity">
+                <span class="ba-bubble-name">Sorasaki Hina</span>
+                <span class="ba-bubble-role">Gehenna Academy · Prefect Team (Head)</span>
+              </div>
+              <div class="ba-bubble-voice-tag">
+                <span class="ba-equalizer-bars"><span></span><span></span><span></span></span>
+                <span>VOICE</span>
+              </div>
+            </div>
+            <div class="ba-bubble-jp">「ああ、待ってたよ。先生。」</div>
+            <p class="ba-bubble-text">
+              "Aa, Sensei... Riwayat kerja di PT. Injeksi Plastik Pasifik dan perkuliahan S1 Teknik Informatika di Universitas Pelita Bangsa telah diverifikasi. Zero defect, zero negligence."
+            </p>
+          </div>
+
+          <div class="ba-about-character-stage">
+            <div class="ba-side-halo-glow" style="background: radial-gradient(circle, rgba(168, 85, 247, 0.45) 0%, transparent 70%);"></div>
+            <img src="assets/characters/hina_portrait.webp" alt="Sorasaki Hina" class="ba-about-student-portrait" data-voice="viewAbout" title="Klik untuk mendengarkan suara Hina!">
+          </div>
+        </div>
+
+        <!-- Right: Dossier Card, Photo & Work Timeline -->
+        <div class="ba-about-right-col">
+          <div class="ba-view-top-bar" style="justify-content: flex-end;">
+            <button class="ba-view-esc-btn btn-back-home" title="Kembali ke Beranda">
+              <span class="ba-esc-tag">ESC</span> BACK
+            </button>
+          </div>
+
+          <!-- SCHALE ID CARD -->
+          <div class="ba-about-card">
+            <div class="ba-id-card-layout">
+              <div class="ba-id-photo-frame">
+                <img src="assets/user/jamaludin.jpg" alt="Foto Jamaludin" class="ba-id-photo">
+                <div class="ba-id-corner-tl"></div>
+                <div class="ba-id-corner-br"></div>
+              </div>
+
+              <div class="ba-id-info">
+                <h3 class="ba-id-name">JAMALUDIN</h3>
+                <div class="ba-id-jp">ジャマルディン // SENSEI ID: SCHALE-083834</div>
+
+                <div class="ba-id-meta-grid">
+                  <div class="ba-meta-box">
+                    <div class="ba-meta-label">PROFESI UTAMA</div>
+                    <div class="ba-meta-val">Operator Quality Control</div>
+                  </div>
+                  <div class="ba-meta-box">
+                    <div class="ba-meta-label">PENDIDIKAN AKTIF</div>
+                    <div class="ba-meta-val">S1 Teknik Informatika</div>
+                  </div>
+                  <div class="ba-meta-box">
+                    <div class="ba-meta-label">LOKASI</div>
+                    <div class="ba-meta-val">Bogor</div>
+                  </div>
+                  <div class="ba-meta-box">
+                    <div class="ba-meta-label">STATUS KELAYAKAN</div>
+                    <div class="ba-meta-val" style="color: var(--ba-accent-green);">CLEARANCE LEVEL 5 (ACTIVE)</div>
+                  </div>
+                </div>
+
+                <p style="font-size: 13px; line-height: 1.6; color: #bed6f7; margin-top: 6px;">
+                  Individu yang berdedikasi tinggi dengan pengalaman kerja nyata dalam melakukan evaluasi produk, pembuatan laporan harian, dan manajemen alur kerja. Memiliki tingkat ketelitian yang tajam dan kemampuan komunikasi yang baik untuk berkolaborasi lintas departemen. Memiliki motivasi tinggi untuk terus berkembang, mempelajari hal baru, dan memberikan kontribusi terbaik bagi perusahaan.
+                </p>
+              </div>
+            </div>
+
+            <!-- TIMELINE: PENGALAMAN KERJA & PENDIDIKAN -->
+            <div style="border-top: 1px solid rgba(0, 210, 254, 0.2); padding-top: 18px; margin-top: 18px;">
+              <h4 style="font-family: var(--ba-font-heading); font-size: 14px; letter-spacing: 1.5px; color: var(--ba-primary); margin-bottom: 14px;">
+                📋 RIWAYAT TUGAS & JEJAK AKADEMIK
+              </h4>
+
+              <div class="ba-timeline">
+                <!-- Node 1: PT Injeksi Plastik Pasifik -->
+                <div class="ba-timeline-node">
+                  <div class="ba-timeline-time">2025 - SEKARANG // AKTIF</div>
+                  <div class="ba-timeline-title">PT. Injeksi Plastik Pasifik</div>
+                  <div class="ba-timeline-subtitle">Operator Quality Control</div>
+                  <div class="ba-timeline-desc">
+                    <ul>
+                      <li><strong>Outgoing Quality Control (OQC) - Final Inspection:</strong> Melakukan inspeksi visual dan dimensi pada produk akhir plastik injection sebelum dikirim ke pelanggan.</li>
+                      <li><strong>Standar Kualitas & AQL:</strong> Memastikan produk yang dikirim memenuhi standar pelanggan dan standar AQL. Mengelola dokumen hasil pemeriksaan serta status kelayakan produk (OK/NG).</li>
+                      <li><strong>Defect Management & Area Control:</strong> Menganalisis penyebab produk cacat, membuat laporan ketidaksesuaian produk, dan memisahkan item NG ke area karantina.</li>
+                      <li><strong>Standar 5S & K3:</strong> Menjaga kebersihan area inspeksi (5S) serta menerapkan standar keselamatan dan kesehatan kerja (K3).</li>
+                      <li><strong>Pencapaian:</strong> Menyelesaikan target produksi harian dengan tingkat ketelitian dan efisiensi tinggi serta mampu menginspeksi berbagai tipe produk plastik secara tepat.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Node 2: Universitas Pelita Bangsa -->
+                <div class="ba-timeline-node">
+                  <div class="ba-timeline-time">2024 - SEKARANG // AKTIF</div>
+                  <div class="ba-timeline-title">Universitas Pelita Bangsa</div>
+                  <div class="ba-timeline-subtitle">S1 Teknik Informatika</div>
+                  <div class="ba-timeline-desc">
+                    Mendalami arsitektur perangkat lunak, pemrograman web dan sistem cerdas, basis data, serta pemecahan masalah algoritmis. Mengintegrasikan teknologi informatika dengan otomatisasi kontrol kualitas industri.
+                  </div>
+                </div>
+
+                <!-- Node 3: SMAS Bina Insan Jonggol -->
+                <div class="ba-timeline-node">
+                  <div class="ba-timeline-time">2019 - 2022 // LULUS</div>
+                  <div class="ba-timeline-title">SMAS Bina Insan Jonggol</div>
+                  <div class="ba-timeline-subtitle">Jurusan Ilmu Pengetahuan Alam (IPA)</div>
+                  <div class="ba-timeline-desc">
+                    Fokus pada sains analitis, penalaran matematis, metodologi riset, serta kedisiplinan belajar.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 04: CONTACT VIEW (Separate Split View) ================= -->
+      <section class="ba-view ba-view-contact" id="viewContact" aria-labelledby="headingContact">
+        <!-- Left: Companion Character Side with Cutout Title & Misono Mika -->
+        <div class="ba-contact-left-col">
+          <div class="ba-view-hero">
+            <div class="ba-cutout-title" id="headingContact">
+              <div class="ba-cutout-box" style="--rot: 2deg;">C</div>
+              <div class="ba-cutout-box accent-blue" style="--rot: -2deg;">O</div>
+              <div class="ba-cutout-box" style="--rot: 1deg;">N</div>
+              <div class="ba-cutout-box accent-yellow" style="--rot: -1deg;">T</div>
+              <div class="ba-cutout-box" style="--rot: 3deg;">A</div>
+              <div class="ba-cutout-box accent-blue" style="--rot: -2deg;">C</div>
+              <div class="ba-cutout-box" style="--rot: 1deg;">T</div>
+            </div>
+            <div class="ba-view-sub">TRANSMISI SCHALE // JALUR HUBUNGAN & PESAN</div>
+          </div>
+
+          <div class="ba-speech-bubble" id="speechBubbleContact" data-voice="viewContact" title="Klik untuk memutar suara Mika">
+            <div class="ba-bubble-header">
+              <div class="ba-bubble-identity">
+                <span class="ba-bubble-name">Misono Mika</span>
+                <span class="ba-bubble-role">Trinity General School · Tea Party</span>
+              </div>
+              <div class="ba-bubble-voice-tag">
+                <span class="ba-equalizer-bars"><span></span><span></span><span></span></span>
+                <span>VOICE</span>
+              </div>
+            </div>
+            <div class="ba-bubble-jp">「先生、おかえり！待ってたよ！」</div>
+            <p class="ba-bubble-text">
+              "Sensei, okaeri! Jalur transmisi SCHALE sudah dibuka! Mau kirim pesan via Gmail, follow Instagram, atau invite Discord? Mika tunggu ya~"
+            </p>
+          </div>
+
+          <div class="ba-contact-character-stage">
+            <div class="ba-side-halo-glow" style="background: radial-gradient(circle, rgba(255, 126, 165, 0.45) 0%, transparent 70%);"></div>
+            <img src="assets/characters/mika_portrait.webp" alt="Misono Mika" class="ba-contact-student-portrait" data-voice="viewContact" title="Klik untuk mendengarkan suara Mika!">
+          </div>
+        </div>
+
+        <!-- Right: Channels & Transmission Form -->
+        <div class="ba-contact-right-col">
+          <div class="ba-view-top-bar" style="justify-content: flex-end;">
+            <button class="ba-view-esc-btn btn-back-home" title="Kembali ke Beranda">
+              <span class="ba-esc-tag">ESC</span> BACK
+            </button>
+          </div>
+
+          <div class="ba-contact-grid">
+            <!-- Contact Direct Links -->
+            <div class="ba-contact-channels">
+              <h3 style="font-family: var(--ba-font-heading); font-size: 13px; color: var(--ba-primary); letter-spacing: 1.5px; margin-bottom: 12px;">
+                📡 SCHALE DISPATCH // DIRECT CHANNELS
+              </h3>
+
+              <!-- Gmail -->
+              <a href="mailto:jamaldan390@gmail.com" class="ba-contact-link-card" id="contactEmail">
+                <div class="ba-channel-left">
+                  <div class="ba-channel-icon-box">@</div>
+                  <div>
+                    <div class="ba-channel-info-name">GMAIL DISPATCH</div>
+                    <div class="ba-channel-info-handle">jamaldan390@gmail.com</div>
+                  </div>
+                </div>
+                <span class="ba-channel-btn-hint">SEND MAIL ▶</span>
+              </a>
+
+              <!-- GitHub -->
+              <a href="https://github.com/ZuyaKazama" target="_blank" rel="noopener noreferrer" class="ba-contact-link-card">
+                <div class="ba-channel-left">
+                  <div class="ba-channel-icon-box">GH</div>
+                  <div>
+                    <div class="ba-channel-info-name">GITHUB REPOSITORY</div>
+                    <div class="ba-channel-info-handle">github.com/ZuyaKazama</div>
+                  </div>
+                </div>
+                <span class="ba-channel-btn-hint">VISIT REPO ▶</span>
+              </a>
+
+              <!-- Instagram -->
+              <a href="https://instagram.com/zuyakazama69" target="_blank" rel="noopener noreferrer" class="ba-contact-link-card">
+                <div class="ba-channel-left">
+                  <div class="ba-channel-icon-box" style="color: var(--ba-accent-pink);">IG</div>
+                  <div>
+                    <div class="ba-channel-info-name">INSTAGRAM</div>
+                    <div class="ba-channel-info-handle">@zuyakazama69</div>
+                  </div>
+                </div>
+                <span class="ba-channel-btn-hint">FOLLOW ▶</span>
+              </a>
+
+              <!-- TikTok -->
+              <div class="ba-contact-link-card">
+                <div class="ba-channel-left">
+                  <div class="ba-channel-icon-box">TT</div>
+                  <div>
+                    <div class="ba-channel-info-name">TIKTOK CHANNEL</div>
+                    <div class="ba-channel-info-handle">zerfek sokai</div>
+                  </div>
+                </div>
+                <span class="ba-channel-btn-hint">VERIFIED</span>
+              </div>
+
+              <!-- Discord -->
+              <div class="ba-contact-link-card" onclick="copyDiscordHandle()" style="cursor: pointer;">
+                <div class="ba-channel-left">
+                  <div class="ba-channel-icon-box" style="color: #7289da;">DC</div>
+                  <div>
+                    <div class="ba-channel-info-name">DISCORD ID</div>
+                    <div class="ba-channel-info-handle" id="discordHandleText">hcfgjbtr (Klik untuk Salin)</div>
+                  </div>
+                </div>
+                <span class="ba-channel-btn-hint">SALIN ID ▶</span>
+              </div>
+            </div>
+
+            <!-- Quick Transmission Form -->
+            <div class="ba-transmission-card">
+              <h3 style="font-family: var(--ba-font-heading); font-size: 13px; color: var(--ba-primary); letter-spacing: 1.5px; margin-bottom: 14px;">
+                ✉️ KIRIM PESAN KE JAMALUDIN
+              </h3>
+              <form id="transmissionForm" onsubmit="handleTransmissionSubmit(event)">
+                <div class="ba-form-group">
+                  <label class="ba-form-label" for="senderName">NAMA PENGIRIM // CODENAME</label>
+                  <input type="text" id="senderName" class="ba-form-input" placeholder="Masukkan nama atau instansi..." required>
+                </div>
+                <div class="ba-form-group">
+                  <label class="ba-form-label" for="senderEmail">EMAIL / KONTAK</label>
+                  <input type="email" id="senderEmail" class="ba-form-input" placeholder="email@contoh.com" required>
+                </div>
+                <div class="ba-form-group">
+                  <label class="ba-form-label" for="senderSubject">SUBJEK MISI / PERTANYAAN</label>
+                  <input type="text" id="senderSubject" class="ba-form-input" placeholder="Tawaran kerja, kolaborasi, atau evaluasi QC..." required>
+                </div>
+                <div class="ba-form-group">
+                  <label class="ba-form-label" for="senderMsg">ISI PESAN TRANSMISI</label>
+                  <textarea id="senderMsg" class="ba-form-textarea" placeholder="Tuliskan pesan Anda secara lengkap..." required></textarea>
+                </div>
+                <button type="submit" class="ba-btn-submit" id="btnSubmitForm">
+                  KIRIM TRANSMISI SEKARANG ▶
+                </button>
+                <div id="formFeedback" style="display: none; margin-top: 10px; font-family: var(--ba-font-mono); font-size: 11px; text-align: center; color: var(--ba-accent-green);"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ================= BOTTOM TACTICAL HUD ================= -->
+    <footer class="ba-footer-hud">
+      <div class="ba-keys-hint-bar">
+        <span class="ba-key-hint"><kbd class="ba-kbd">↑ / ↓</kbd> SELECT</span>
+        <span class="ba-key-hint"><kbd class="ba-kbd">ENTER</kbd> CONFIRM</span>
+        <span class="ba-key-hint"><kbd class="ba-kbd">ESC</kbd> BACK</span>
+        <span class="ba-key-hint"><kbd class="ba-kbd">1-4</kbd> QUICK MENU</span>
+        <span class="ba-key-hint"><kbd class="ba-kbd">🔊</kbd> VOICE REACTIVE</span>
+        <span class="ba-key-hint"><kbd class="ba-kbd">M</kbd> MUTE</span>
+      </div>
+
+      <div class="ba-footer-center">
+        <span>SCHALE OS // JAMALUDIN PORTFOLIO · KIVOTOS GENERAL COUNCIL VERIFIED</span>
+      </div>
+
+      <div class="ba-footer-right">
+        <span>STATUS: 100% OPERATIONAL</span>
+      </div>
+    </footer>
+
+    <!-- ================= PROJECT DETAILS MODAL ================= -->
+    <div class="ba-modal-backdrop" id="projectModal" onclick="closeProjectModal(event)">
+      <div class="ba-modal-content" onclick="event.stopPropagation()">
+        <button class="ba-modal-close-btn" onclick="closeProjectModal()">✕</button>
+        <div id="modalBody">
+          <!-- Populated dynamically via JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= TACTICAL SCREEN WIPE / SLASH TRANSITION OVERLAY ================= -->
+    <div class="ba-screen-transition" id="screenTransition">
+      <div class="ba-slash-blade ba-blade-lead"></div>
+      <div class="ba-slash-blade ba-blade-accent"></div>
+      <div class="ba-slash-blade ba-blade-main"></div>
+      <div class="ba-slash-banner" id="slashBanner">
+        <div class="ba-slash-decor">/// SCHALE TACTICAL LINK ///</div>
+        <div class="ba-slash-title" id="slashText">SECTOR ACCESS</div>
+        <div class="ba-slash-sub">KIVOTOS GENERAL STUDENT COUNCIL · SYSTEM AUTHORIZED</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/students.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
