@@ -935,16 +935,27 @@ a.hl:hover { text-decoration: underline; }
 .channel > * { transform: skewX(6deg); }
 .channel__icon {
   flex: none;
-  width: 36px; height: 36px;
+  width: 2.6rem; height: 2.6rem;
   display: grid;
   place-items: center;
   background: var(--blue);
   color: #fff;
-  font-family: var(--f-display);
-  font-weight: 900;
-  font-size: 1rem;
-  border-radius: 4px;
+  border-radius: 10px;
+  box-shadow: 0 0 0 2px #fff, 0 4px 10px -4px rgba(10, 40, 90, .45);
+  transition: box-shadow .2s, transform .2s var(--ease-out);
 }
+.channel__icon svg { width: 1.45rem; height: 1.45rem; overflow: visible; }
+
+/* Brand colours */
+.channel__icon--gmail { background: #fff; box-shadow: 0 0 0 1px #dadce0 inset, 0 0 0 2px #fff, 0 4px 10px -4px rgba(10, 40, 90, .45); }
+.channel__icon--instagram {
+  background:
+    radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+}
+.channel__icon--tiktok { background: #000; }
+.channel__icon--tiktok svg { filter: drop-shadow(-1.2px -1px 0 #25f4ee) drop-shadow(1.2px 1px 0 #fe2c55); }
+.channel__icon--discord { background: #5865f2; --discord-eye: #5865f2; }
+.channel__icon--github { background: #181717; }
 .channel__text { flex: 1; display: flex; flex-direction: column; line-height: 1.2; min-width: 0; }
 .channel__text b { font-family: var(--f-display); font-weight: 800; font-style: italic; font-size: 1.1875rem; text-transform: uppercase; letter-spacing: .06em; }
 .channel__text small { color: var(--muted); font-size: 0.875rem; overflow-wrap: anywhere; }
@@ -967,7 +978,10 @@ a.hl:hover { text-decoration: underline; }
 }
 .channel:hover b, .channel.is-sel b, .channel:focus-visible b { color: #fff; }
 .channel:hover small, .channel.is-sel small, .channel:focus-visible small { color: #b9cbe6; }
-.channel:hover .channel__icon, .channel.is-sel .channel__icon, .channel:focus-visible .channel__icon { background: var(--yellow); color: var(--navy); }
+.channel:hover .channel__icon, .channel.is-sel .channel__icon, .channel:focus-visible .channel__icon {
+  box-shadow: 0 0 0 2px var(--navy), 0 0 0 4px var(--yellow);
+  transform: rotate(-6deg) scale(1.06);
+}
 .channel:hover .channel__cta, .channel.is-sel .channel__cta, .channel:focus-visible .channel__cta { background: var(--yellow); border-color: var(--yellow); color: var(--navy); }
 
 /* =========================================================
