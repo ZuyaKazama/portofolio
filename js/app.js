@@ -12,7 +12,7 @@
   const STUDENTS = {
     aris:  { name: "Tendou Aris",   school: "Millennium", img: "assets/characters/aris_portrait.webp" },
     yuuka: { name: "Hayase Yuuka",  school: "Millennium", img: "assets/characters/yuuka_portrait.webp" },
-    hina:  { name: "Sorasaki Hina", school: "Gehenna",    img: "assets/characters/hina_portrait.webp", wide: true },
+    mine:  { name: "Aomori Mine",   school: "Trinity",    img: "assets/characters/mine_portrait.webp" },
     mika:  { name: "Misono Mika",   school: "Trinity",    img: "assets/characters/mika_portrait.webp" },
   };
 
@@ -21,7 +21,7 @@
     menu: "assets/audio/home_shiroko.mp3",
     experience: "assets/audio/experience_aris.mp3",
     skills: "assets/audio/skills_yuuka.mp3",
-    about: "assets/audio/about_hina.mp3",
+    about: "assets/audio/about_mine.mp3",
     contact: "assets/audio/contact_mika.mp3",
   };
 
@@ -89,6 +89,9 @@
       this.voice.volume = 0.9;
       this.voice.play().catch(() => {});
     },
+    hush() {
+      if (this.voice) { this.voice.pause(); this.voice = null; }
+    },
     toggle() {
       this.on = !this.on;
       store.set("ba-sound", this.on ? "on" : "off");
@@ -123,6 +126,7 @@
   function go(id, { push = true } = {}) {
     if (busy || id === current) return;
     busy = true;
+    if (PAGES.includes(current)) audio.hush();   // a page's voice line ends when you leave it
     if (push) {
       const hash = id === "menu" || id === "title" ? " " : `#${id}`;
       history.pushState({ id }, "", hash === " " ? location.pathname + location.search : hash);
