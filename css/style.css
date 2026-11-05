@@ -804,18 +804,6 @@ b { color: var(--navy); }
   overflow: hidden;
 }
 .idcard__photo img { position: absolute; bottom: 0; left: 50%; width: 112%; max-width: none; transform: translateX(-50%); }
-.idcard__halo {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: 110px;
-  height: 44px;
-  transform: translateX(-50%);
-  color: var(--yellow);
-  z-index: 2;
-  filter: drop-shadow(0 0 6px rgba(255, 224, 61, .9));
-  animation: haloBob 3s ease-in-out infinite;
-}
 .idcard__school {
   margin: 0;
   font-family: var(--f-display);
