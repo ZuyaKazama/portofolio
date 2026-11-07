@@ -7,12 +7,42 @@
   <title>Jamaludin · Portfolio</title>
   <meta name="description" content="Portofolio Jamaludin — Operator Quality Control & mahasiswa S1 Teknik Informatika. Bertema Blue Archive." />
   <link rel="icon" type="image/png" href="assets/img/schale_logo.png" />
+  <!-- Link preview (WhatsApp, Discord, Telegram, X, Facebook) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Sensei's Dossier" />
+  <meta property="og:locale" content="id_ID" />
+  <meta property="og:title" content="Jamaludin · Portfolio Archive" />
+  <meta property="og:description" content="Operator Quality Control & mahasiswa S1 Teknik Informatika — portofolio bertema Blue Archive. Touch to Start ☆" />
+  <meta property="og:image" content="assets/img/og-cover.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Jamaludin — Portfolio Archive bertema Blue Archive" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Jamaludin · Portfolio Archive" />
+  <meta name="twitter:description" content="Operator Quality Control & mahasiswa S1 Teknik Informatika — portofolio bertema Blue Archive." />
+  <meta name="twitter:image" content="assets/img/og-cover.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,600&family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800;1,900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+  <!-- ============ LOADING ============ -->
+  <div class="loading" id="loading" role="progressbar" aria-label="Memuat portofolio" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <div class="loading__center">
+      <img class="loading__logo" src="assets/img/schale_logo.png" alt="" />
+      <p class="loading__title">Now Loading<span class="loading__dots" aria-hidden="true"><i>.</i><i>.</i><i>.</i></span></p>
+    </div>
+    <div class="loading__tip">
+      <span class="loading__tip-label">Tips</span>
+      <p class="loading__tip-text" id="loadingTip">Menyiapkan arsip Sensei…</p>
+    </div>
+    <div class="loading__foot">
+      <div class="loading__bar"><span class="loading__fill" id="loadingFill"></span></div>
+      <span class="loading__pct" id="loadingPct">0%</span>
+    </div>
+  </div>
+
   <!-- Reusable halo shape -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <symbol id="halo" viewBox="0 0 200 80">
@@ -78,6 +108,7 @@
         <span class="menu__nametag-name" id="menuName">Tendou Aris</span>
       </div>
     </div>
+    <button class="poke-hit poke-hit--menu" id="menuPoke" type="button" aria-label="Sapa karakter"></button>
 
     <div class="menu__left">
       <p class="menu__kicker">Take a look at my work, Sensei</p>
@@ -115,6 +146,7 @@
   <section id="experience" class="screen screen--page page--experience" aria-label="Pengalaman kerja">
     <div class="stripes" aria-hidden="true"></div>
     <img class="page__student page__student--left" src="assets/characters/aris_portrait.webp" alt="" />
+    <button class="poke-hit poke-hit--left" type="button" data-poke="aris" aria-label="Sapa Tendou Aris"></button>
     <div class="page__body">
       <header class="page__head">
         <h2 class="page__title"><span class="tiles" data-tiles>EXPERIENCE</span></h2>
@@ -172,6 +204,7 @@
   <section id="skills" class="screen screen--page page--skills" aria-label="Kemampuan">
     <div class="stripes" aria-hidden="true"></div>
     <img class="page__student page__student--right" src="assets/characters/yuuka_portrait.webp" alt="" />
+    <button class="poke-hit poke-hit--right" type="button" data-poke="yuuka" aria-label="Sapa Hayase Yuuka"></button>
     <div class="page__body">
       <header class="page__head">
         <h2 class="page__title"><span class="tiles" data-tiles>SKILLS</span></h2>
@@ -210,6 +243,7 @@
   <section id="about" class="screen screen--page page--about" aria-label="Tentang saya">
     <div class="stripes" aria-hidden="true"></div>
     <img class="page__student page__student--left" src="assets/characters/mine_portrait.webp" alt="" />
+    <button class="poke-hit poke-hit--left" type="button" data-poke="mine" aria-label="Sapa Aomori Mine"></button>
     <div class="page__body">
       <header class="page__head">
         <h2 class="page__title"><span class="tiles" data-tiles>ABOUT</span></h2>
@@ -231,6 +265,7 @@
               <div><dt>Role</dt><dd>Support</dd></div>
               <div><dt>Major</dt><dd>Teknik Informatika</dd></div>
             </dl>
+            <button class="chip-btn" id="gachaReplay" type="button">↻ Recruit lagi</button>
           </div>
         </article>
 
@@ -270,6 +305,7 @@
   <section id="contact" class="screen screen--page page--contact" aria-label="Kontak">
     <div class="stripes" aria-hidden="true"></div>
     <img class="page__student page__student--left" src="assets/characters/mika_portrait.webp" alt="" />
+    <button class="poke-hit poke-hit--left" type="button" data-poke="mika" aria-label="Sapa Misono Mika"></button>
     <div class="page__body">
       <header class="page__head">
         <h2 class="page__title"><span class="tiles" data-tiles>CONTACT</span></h2>
@@ -282,32 +318,31 @@
           <span class="momo__logo">MomoTalk</span>
           <span class="momo__status">● online</span>
         </div>
-        <div class="momo__chat">
-          <img class="momo__avatar" src="assets/characters/mika_icon.webp" alt="Mika" />
-          <div>
-            <p class="momo__who">Misono Mika</p>
-            <p class="momo__bubble">Sensei~ mau ngobrol sama Jamaludin? Ini semua kontaknya ya ☆</p>
-          </div>
+        <div class="momo__log" id="momoLog" aria-live="polite"></div>
+        <div class="momo__reply" id="momoReply" hidden>
+          <p class="momo__reply-head">Balas</p>
+          <div class="momo__options" id="momoOptions"></div>
         </div>
+        <p class="momo__divider"><span>Semua kontak</span></p>
 
         <ul class="channels" id="channels">
-          <li><a class="channel" href="mailto:jamaldan390@gmail.com">
+          <li data-ch="gmail"><a class="channel" href="mailto:jamaldan390@gmail.com">
             <span class="channel__icon channel__icon--gmail"><svg aria-hidden="true"><use href="#i-gmail" /></svg></span>
             <span class="channel__text"><b>Gmail</b><small>jamaldan390@gmail.com</small></span>
             <span class="channel__cta">Send Mail ▸</span></a></li>
-          <li><a class="channel" href="https://www.instagram.com/zuyakazama69/" target="_blank" rel="noopener">
+          <li data-ch="instagram"><a class="channel" href="https://www.instagram.com/zuyakazama69/" target="_blank" rel="noopener">
             <span class="channel__icon channel__icon--instagram"><svg aria-hidden="true"><use href="#i-instagram" /></svg></span>
             <span class="channel__text"><b>Instagram</b><small>@zuyakazama69</small></span>
             <span class="channel__cta">Visit ▸</span></a></li>
-          <li><a class="channel" href="https://www.tiktok.com/search/user?q=zerfek%20sokai" target="_blank" rel="noopener">
+          <li data-ch="tiktok"><a class="channel" href="https://www.tiktok.com/search/user?q=zerfek%20sokai" target="_blank" rel="noopener">
             <span class="channel__icon channel__icon--tiktok"><svg aria-hidden="true"><use href="#i-tiktok" /></svg></span>
             <span class="channel__text"><b>TikTok</b><small>zerfek sokai</small></span>
             <span class="channel__cta">Visit ▸</span></a></li>
-          <li><button class="channel" type="button" data-copy="hcfgjbtr">
+          <li data-ch="discord"><button class="channel" type="button" data-copy="hcfgjbtr">
             <span class="channel__icon channel__icon--discord"><svg aria-hidden="true"><use href="#i-discord" /></svg></span>
             <span class="channel__text"><b>Discord</b><small>hcfgjbtr</small></span>
             <span class="channel__cta">Copy ▸</span></button></li>
-          <li><a class="channel" href="https://github.com/ZuyaKazama" target="_blank" rel="noopener">
+          <li data-ch="github"><a class="channel" href="https://github.com/ZuyaKazama" target="_blank" rel="noopener">
             <span class="channel__icon channel__icon--github"><svg aria-hidden="true"><use href="#i-github" /></svg></span>
             <span class="channel__text"><b>GitHub</b><small>github.com/ZuyaKazama</small></span>
             <span class="channel__cta">Visit ▸</span></a></li>
@@ -321,8 +356,33 @@
     <div class="hud__tl">SCHALE <i>//</i> JAMALUDIN</div>
     <div class="hud__tr">
       <span class="hud__chip">Operator QC · S1 Teknik Informatika</span>
-      <button class="hud__sound" id="soundBtn" type="button" aria-pressed="true" title="Musik & suara (M)">♪ ON</button>
+      <button class="hud__sound" id="soundBtn" type="button" aria-expanded="false" aria-controls="soundPanel" title="Pengaturan suara">♪ ON</button>
     </div>
+    <div class="sound-panel" id="soundPanel" role="dialog" aria-label="Pengaturan suara" hidden>
+      <div class="sound-panel__head">
+        <span>Pengaturan Suara</span>
+        <button class="sound-panel__close" id="soundClose" type="button" aria-label="Tutup pengaturan">✕</button>
+      </div>
+      <label class="slider">
+        <span class="slider__label">Musik (BGM)</span>
+        <input type="range" id="volBgm" min="0" max="100" step="5" />
+        <output class="slider__val" id="volBgmOut" for="volBgm">30</output>
+      </label>
+      <label class="slider">
+        <span class="slider__label">Suara karakter</span>
+        <input type="range" id="volVoice" min="0" max="100" step="5" />
+        <output class="slider__val" id="volVoiceOut" for="volVoice">90</output>
+      </label>
+      <label class="toggle">
+        <input type="checkbox" id="muteAll" />
+        <span class="toggle__ui" aria-hidden="true"></span>
+        <span>Bisukan semua <kbd class="key-only">M</kbd></span>
+      </label>
+    </div>
+    <button class="hud__poke" id="hudPoke" type="button" aria-label="Sapa karakter">
+      <img id="hudPokeImg" src="assets/characters/aris_icon.webp" alt="" />
+      <span>Tap!</span>
+    </button>
     <button class="hud__back" data-back type="button" aria-label="Kembali ke menu">◀ Menu</button>
     <div class="hud__bl">
       <span><kbd>↑↓</kbd> Select</span>
@@ -340,6 +400,36 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <!-- Character dialogue / subtitles -->
+  <div class="dialog" id="dialog" role="status" aria-live="polite" hidden>
+    <p class="dialog__name"><span class="dialog__school" id="dialogSchool"></span><b id="dialogName"></b></p>
+    <p class="dialog__text" id="dialogText"></p>
+    <p class="dialog__ja" id="dialogJa" lang="ja"></p>
+  </div>
+
+  <!-- ============ RECRUITMENT (gacha) ============ -->
+  <div class="gacha" id="gacha" role="dialog" aria-label="Recruitment" hidden>
+    <div class="gacha__rays" aria-hidden="true"></div>
+    <div class="gacha__crystal" aria-hidden="true"></div>
+    <div class="gacha__ring" aria-hidden="true"></div>
+    <div class="gacha__flash" aria-hidden="true"></div>
+    <div class="gacha__card">
+      <div class="gacha__face gacha__face--back" aria-hidden="true"><img src="assets/img/schale_logo.png" alt="" /></div>
+      <div class="gacha__face gacha__face--front">
+        <span class="gacha__new">NEW</span>
+        <div class="gacha__photo"><img src="assets/img/jamaludin.webp" alt="Foto Jamaludin" /></div>
+        <div class="gacha__stars" aria-label="Bintang 3"><i>★</i><i>★</i><i>★</i></div>
+        <p class="gacha__school">Universitas Pelita Bangsa</p>
+        <p class="gacha__name">Jamaludin</p>
+        <p class="gacha__role">Operator Quality Control</p>
+      </div>
+    </div>
+    <p class="gacha__line">“Jamaludin, Operator Quality Control. Mohon bantuannya, Sensei!”</p>
+    <p class="gacha__hint">Tap untuk lanjut</p>
+    <button class="gacha__skip" id="gachaSkip" type="button">Skip ▸▸</button>
+  </div>
+
+  <script src="js/voices.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
