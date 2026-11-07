@@ -1683,6 +1683,103 @@ body[data-screen="title"] .hud__chip { display: none; }
 .hud__back:active { transform: skewX(-12deg) translate(2px, 2px); box-shadow: 2px 2px 0 var(--navy); }
 
 /* =========================================================
+   PSEUDO-3D PARALLAX (2D art) — layers follow cursor / gyroscope
+   js/parallax.js sets --px / --py (-1…1) on <html> and .px-on
+   ========================================================= */
+.px-wrap { position: absolute; inset: 0; pointer-events: none; }
+.screen--page > .px-wrap { z-index: 2; }
+.screen--page > .px-wrap--fx, .screen--page > .px-wrap--halo { width: 40vw; }
+.page--skills > .px-wrap--fx, .page--skills > .px-wrap--halo { left: auto; right: 0; }
+
+/* layer depths: background < halo < student < particles */
+.px-on .sky,
+.px-on .stripes { transform: translate3d(calc(var(--px, 0) * -10px), calc(var(--py, 0) * -7px), 0) scale(1.04); }
+.px-on .screen--page::before { transform: translate3d(calc(var(--px, 0) * -16px), calc(var(--py, 0) * -9px), 0) scale(1.06); }
+.px-on .px-wrap--halo { transform: translate3d(calc(var(--px, 0) * -24px), calc(var(--py, 0) * -14px), 0); }
+.px-on .px-wrap--char {
+  transform: perspective(1100px)
+    translate3d(calc(var(--px, 0) * -34px), calc(var(--py, 0) * -16px), 0)
+    rotateY(calc(var(--px, 0) * 5deg)) rotateX(calc(var(--py, 0) * -3deg));
+  will-change: transform;
+}
+.px-on .px-wrap--fx,
+.px-on .floaters { transform: translate3d(calc(var(--px, 0) * -56px), calc(var(--py, 0) * -32px), 0); }
+
+.screen--title .px-wrap--char { transform-origin: 78% 100%; }
+.menu__art .px-wrap--char { transform-origin: 62% 100%; }
+.screen--page .px-wrap--char { transform-origin: 18vw 100%; }
+.page--skills .px-wrap--char { transform-origin: calc(100% - 18vw) 100%; }
+
+/* decorative halo layer behind the student */
+.px-halo { position: absolute; color: rgba(255, 255, 255, .36); animation: haloDrift 5s ease-in-out infinite; }
+.px-wrap--halo-title .px-halo { right: 7vw; top: 5vh; width: 36vw; height: 14.4vw; color: rgba(63, 210, 255, .45); }
+.px-wrap--halo-page .px-halo { left: 4%; top: 6vh; width: 88%; height: 14vw; }
+@keyframes haloDrift { 50% { translate: 0 -10px; scale: 1.04; opacity: .75; } }
+
+/* floating particles in front of the student */
+.px-wrap--fx { overflow: hidden; }
+.px-wrap--fx svg { position: absolute; bottom: -40px; color: #fff; opacity: .55; animation: floatUp linear infinite; }
+
+/* =========================================================
+   3D CHARACTER (js/character3d.js) — canvas in the student's spot
+   ========================================================= */
+.char3d { position: absolute; top: 0; bottom: 0; display: none; pointer-events: none; }
+.char3d.is-on { display: block; }
+.char3d[data-screen="title"] { right: 0; width: 50vw; }
+.char3d[data-screen="menu"] { left: 8%; right: 0; }
+.screen--page > .char3d { left: 0; width: 37vw; z-index: 2; }
+.page--skills > .char3d { left: auto; right: 0; }
+.screen--page.is-active > .char3d { animation: slideL .7s var(--ease-out) both; }
+.page--skills.is-active > .char3d { animation-name: slideR; }
+.char3d__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity .6s ease;
+  filter: drop-shadow(10px 10px 0 rgba(29, 43, 69, .15));
+}
+.char3d.is-ready .char3d__canvas { opacity: 1; }
+.screen:has(.poke-hit:hover) .char3d__canvas { filter: drop-shadow(10px 10px 0 rgba(29, 43, 69, .15)) brightness(1.04); }
+
+/* the 3D model replaces the 2D portrait (and draws its own halo) */
+body[data-char="3d"] .title__student,
+body[data-char="3d"] .menu__student,
+body[data-char="3d"] .page__student,
+body[data-char="3d"] .menu__halo,
+body[data-char="3d"] .px-halo { visibility: hidden; transition: visibility 0s .6s; }
+
+/* "Now Loading..." while the model downloads */
+.char3d__loader {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--hud-h) + 14vh + var(--safe-b));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 11.5rem;
+  padding: 10px 22px 12px;
+  translate: -50% 0;
+  transform: skewX(-10deg);
+  background: rgba(255, 255, 255, .92);
+  border: 2px solid var(--navy);
+  box-shadow: 5px 5px 0 var(--navy);
+  font-family: var(--f-display);
+  color: var(--navy);
+  animation: riseC .4s var(--ease-out) both;
+}
+.char3d__halo {
+  width: 78px;
+  height: 32px;
+  color: var(--blue);
+  filter: drop-shadow(0 0 8px rgba(63, 210, 255, .9));
+  animation: haloTurn 1.4s linear infinite;
+}
+@keyframes haloTurn { from { transform: perspective(240px) rotateX(55deg) rotateZ(0deg); } to { transform: perspective(240px) rotateX(55deg) rotateZ(360deg); } }
+.char3d__text { margin: 4px 0 0; font-weight: 800; font-style: italic; font-size: 1.05rem; letter-spacing: .1em; text-transform: uppercase; }
+.char3d__pct { margin: 0; font-weight: 900; font-style: italic; font-size: 1.6rem; line-height: 1; color: var(--blue); }
+
+/* =========================================================
    RESPONSIVE
    ========================================================= */
 
@@ -1692,6 +1789,7 @@ body[data-screen="title"] .hud__chip { display: none; }
   .about { grid-template-columns: 1fr; }
   .page__body { padding-left: 34vw; }
   .page--skills .page__body { padding-right: 34vw; }
+  .screen--page > .char3d { width: 34vw; }
   .menu__label { font-size: clamp(1.9rem, min(5vw, 7.4vh), 4rem); }
 }
 
@@ -1812,6 +1910,17 @@ body[data-screen="title"] .hud__chip { display: none; }
   .momo__log { max-height: none; overflow: visible; padding: 14px 16px 4px; }
   .momo__reply { margin: 8px 16px 0; }
   .momo__divider { margin: 18px 16px 0; }
+}
+
+/* Compact layout: the student layers are fixed backgrounds (the screen itself scrolls) */
+@media (max-width: 860px), (max-height: 560px), (orientation: portrait) and (max-width: 1100px) {
+  .screen--page > .px-wrap { position: fixed; }
+  .screen--page > .px-wrap--fx, .screen--page > .px-wrap--halo { width: 100%; opacity: .5; }
+  .px-wrap--halo-page .px-halo { left: auto; right: -6vw; width: 70vw; height: 28vw; }
+  .page--skills .px-wrap--char { transform-origin: 70% 100%; }
+  .screen--page .px-wrap--char { transform-origin: 70% 100%; }
+  .screen--title .px-wrap--char { transform-origin: 50% 100%; }
+  .px-wrap--halo-title .px-halo { right: 15vw; top: 8vh; width: 70vw; height: 28vw; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -32,6 +32,9 @@
     contact: "assets/audio/contact_mika.mp3",
   };
   const LINES = window.VOICE_LINES || {};
+
+  /** Notify the 3D character (js/character3d.js) — harmless when it isn't loaded. */
+  const emit = (name, detail) => window.dispatchEvent(new CustomEvent(`ba:${name}`, { detail }));
   const PAGE_TEXT = window.PAGE_LINE_TEXT || {};
 
   const TIPS = [
@@ -159,8 +162,10 @@
       if (!src || !this.canSpeak()) return null;
       const a = new Audio(src);
       a.volume = settings.voice / 100;
-      a.addEventListener("ended", () => { if (this.voice === a) { this.voice = null; onEnd && onEnd(); } });
-      a.play().catch(() => { if (this.voice === a) { this.voice = null; onEnd && onEnd(); } });
+      const done = () => { if (this.voice === a) { this.voice = null; emit("voice", { on: false }); onEnd && onEnd(); } };
+      a.addEventListener("ended", done);
+      a.addEventListener("playing", () => { if (this.voice === a) emit("voice", { on: true }); });
+      a.play().catch(done);
       this.voice = a;
       return a;
     },
@@ -176,7 +181,7 @@
       if (t) this.line(t.who, VOICES[key], t.id, t.ja);
       else this.play(VOICES[key]);
     },
-    stopVoice() { if (this.voice) { this.voice.pause(); this.voice = null; } },
+    stopVoice() { if (this.voice) { this.voice.pause(); this.voice = null; emit("voice", { on: false }); } },
     hush() { this.stopVoice(); dialog.hide(); },
     setMuted(m) {
       settings.muted = m;
@@ -264,6 +269,7 @@
     document.body.dataset.screen = id;
     current = id;
     updateHudPoke();
+    emit("screen", { id, student: id === "title" ? "shiroko" : currentStudent() });
     onEnter(id);
   }
 
@@ -342,6 +348,7 @@
     $("#menuName").textContent = st.name;
     $("#menuSchool").textContent = st.school;
     updateHudPoke();
+    emit("student", { student: menuItems[menuIndex].dataset.student });
     if (!menuStudent.src.endsWith(st.img)) {
       menuStudent.classList.add("is-swapping");
       clearTimeout(swapTimer);
@@ -382,6 +389,7 @@
     lastLine[who] = i;
     const l = lines[i];
     pokeAnim();
+    emit("poke", { student: who });
     audio.line(who, l.src, l.id, l.ja);
   }
   function updateHudPoke() {
